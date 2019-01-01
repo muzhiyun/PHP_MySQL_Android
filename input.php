@@ -15,7 +15,7 @@ $shiju=$_POST["shiju"];
 	}
 	
  function apidata(){
-	$durl='http://yijuzhan.com/api/word.php?m=json' ;
+	$durl='http://127.0.0.1/yiju/index.php?m=json' ;
 	#echo ("$durl");
 	$apidata=curl_file_get_contents($durl);
 	#echo ("$apidata");
