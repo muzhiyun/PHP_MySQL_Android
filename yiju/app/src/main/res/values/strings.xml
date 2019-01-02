@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">yiju</string>
+    <string name="appwidget_text">小北是个大猪头</string>
+    <string name="add_widget">Add widget</string>
+</resources>
