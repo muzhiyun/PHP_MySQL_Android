@@ -61,11 +61,7 @@ public class AppWidgetService extends Service{
         public void onReceive(Context context, Intent intent) {
             Log.d("TAG","接收器已收到");
             Toast.makeText(context, "接收到已刷新", Toast.LENGTH_SHORT).show();
-            receiver = new MyReceiver();
-            IntentFilter filter = new IntentFilter();
             //Log.d("TAG",context+"");
-            filter.addAction(ACTION_MAKE_NUMBER);
-            registerReceiver(receiver, filter);
             if (ACTION_MAKE_NUMBER.equals(intent.getAction())) {
                 // 生成一个随机数字，以系统广播的形式将这个数字提交到
                 //Toast.makeText(context, "小北你好!", Toast.LENGTH_SHORT).show();
