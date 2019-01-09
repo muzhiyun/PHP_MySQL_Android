@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class NewAppWidget extends AppWidgetProvider {
     //public static final String CLICK_ACTION = "app_widget_provider";
     public static final String ACTION_MAKE_NUMBER = "app_widget_provider";
-   // public static final String AppWidgetService = "AppWidgetService";
+    // public static final String AppWidgetService = "AppWidgetService";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
@@ -26,11 +26,12 @@ public class NewAppWidget extends AppWidgetProvider {
         //remoteViews.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
 
         Intent numberIntent = new Intent(ACTION_MAKE_NUMBER);
-        remoteViews.setOnClickPendingIntent(R.id.appwidget_text, PendingIntent.getBroadcast(context, 0, numberIntent , 0));
-
-        Log.d("TAG","发送广播");
-        appWidgetManager.updateAppWidget(appWidgetId,remoteViews);
-       // Toast.makeText(context, "广播已发送", Toast.LENGTH_SHORT).show();
+        remoteViews.setOnClickPendingIntent(R.id.appwidget_text, PendingIntent.getBroadcast(context, 0, numberIntent, 0));
+        //Jsondecode jsondecode = new Jsondecode();
+        //jsondecode.httpget();
+        Log.d("TAG", "发送广播");
+        appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
+        // Toast.makeText(context, "广播已发送", Toast.LENGTH_SHORT).show();
       /*
         CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
@@ -48,7 +49,10 @@ public class NewAppWidget extends AppWidgetProvider {
         // There may be multiple widgets active, so update all of them
 
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-        Log.d("TAG","onUpdate方法调用了");
+        Log.d("TAG", "onUpdate方法调用了");
+
+
+
         //Intent intent = new Intent(context,AppWidgetService.class);
         //context.startService(intent);
         //Toast.makeText(context, "onUpdate被调用", Toast.LENGTH_SHORT).show();
@@ -64,8 +68,8 @@ public class NewAppWidget extends AppWidgetProvider {
         super.onEnabled(context);
         //启动MyService
         //Toast.makeText(context, "onEnable方法被调用", Toast.LENGTH_SHORT).show();
-        Log.d("TAG","onEnable方法调用了");
-        Intent intent = new Intent(context,AppWidgetService.class);
+        Log.d("TAG", "onEnable方法调用了");
+        Intent intent = new Intent(context, AppWidgetService.class);
         context.startService(intent);
 
     }
@@ -75,7 +79,7 @@ public class NewAppWidget extends AppWidgetProvider {
         //删除AppWidget的时候调用
         super.onDeleted(context, appWidgetIds);
         System.out.println("onDeleted");
-        Intent intent = new Intent(context,AppWidgetService.class);
+        Intent intent = new Intent(context, AppWidgetService.class);
         context.startService(intent);
     }
 
@@ -84,8 +88,8 @@ public class NewAppWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
         super.onDisabled(context);
         //停止MyService
-        Log.d("TAG","onDisable方法调用了");
-        Intent intent = new Intent(context,AppWidgetService.class);
+        Log.d("TAG", "onDisable方法调用了");
+        Intent intent = new Intent(context, AppWidgetService.class);
         context.stopService(intent);
 
     }
@@ -94,15 +98,18 @@ public class NewAppWidget extends AppWidgetProvider {
      * 接收窗口小部件点击时发送的广播
      */
 
-    /*
+
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         //AppWidgetService appWidgetService = new AppWidgetService();
-        if (intent.getAction().equals(CLICK_ACTION)) {
-            Toast.makeText(context, "小北你好!", Toast.LENGTH_SHORT).show();
-           // appWidgetService.onCreate();
-    }
+        if (intent.getAction().equals(ACTION_MAKE_NUMBER)) {
+            //Toast.makeText(context, "小北你好!", Toast.LENGTH_SHORT).show();
+            Intent intent2 = new Intent(context, AppWidgetService.class);
+            context.startService(intent2);
+            // appWidgetService.onCreate();
+        }
 
-    */
+
+    }
 }
