@@ -23,6 +23,19 @@ import okhttp3.Response;
 public class AppWidgetService extends Service{
 
     public static final String ACTION_MAKE_NUMBER = "app_widget_provider";
+    private String response = null;
+    private static AppWidgetService example = new AppWidgetService();
+
+    OkHttpClient client = new OkHttpClient();
+    String run(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
+    }
 
 /*
     @Override
@@ -54,42 +67,20 @@ public class AppWidgetService extends Service{
         Log.d("TAG","注销广播接收器");
         super.onDestroy();
     }
-
-    public class GetExample {
-        OkHttpClient client = new OkHttpClient();
-
-        String run(String url) throws IOException {
-            Log.d("TAG","url是  ");
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-            Log.d("TAG",url);
-            try (Response response = client.newCall(request).execute()) {
-                Log.d("TAG","获取的  "+response.body().string());
-                return response.body().string();
-            }catch (Exception e)
-            {
-                //Log.d("TAG","连接失败");
-                return "连接失败";
-            }
-        }
-
-/*
-         String okhttp() throws IOException {
-            GetExample example = new GetExample();
-             Log.d("TAG", "okhttp");
-            String response = example.run("http://192.168.11.100/yiju/index.php?m=json");
-            System.out.println(response);
-            Log.d("TAG", response);
-            return response;
-        }
-*/
-    }
+//
+//    public void getResp () {
+//        try {
+//            response = example.run("http://192.168.43.91/yiju/index.php?m=json");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.print(response);
+//    }
 
     /**
      * 广播接收器
      */
-    public class MyReceiver extends BroadcastReceiver {
+    class MyReceiver extends BroadcastReceiver {
 
 
         // 接收到Widget发送的广播
@@ -97,13 +88,6 @@ public class AppWidgetService extends Service{
         public void onReceive(Context context, Intent intent) {
             Log.d("TAG","接收器已收到");
             //Toast.makeText(context, "接收到已刷新", Toast.LENGTH_SHORT).show();
-            //receiver = new MyReceiver();
-            //IntentFilter filter = new IntentFilter();
-            //Log.d("TAG",context+"");
-            //filter.addAction(ACTION_MAKE_NUMBER);
-            //registerReceiver(receiver, filter);
-            Toast.makeText(context, "接收到已刷新", Toast.LENGTH_SHORT).show();
-            //Log.d("TAG",context+"");
             if (ACTION_MAKE_NUMBER.equals(intent.getAction())) {
                 // 生成一个随机数字，以系统广播的形式将这个数字提交到
                 //Toast.makeText(context, "小北你好!", Toast.LENGTH_SHORT).show();
@@ -112,19 +96,36 @@ public class AppWidgetService extends Service{
                 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
                 //设置要显示的TextView，及显示的内容
                 try {
-                    //Log.d("TAG","进来了");
-                    GetExample example = new GetExample();
-                    String next_text = example.run("http://127.0.0.1/yiju/index.php?m=json");
-                    //Log.d("TAG","得到了");
+                    Log.d("TAG","进来了");
+                    AppWidgetService testappserver =new AppWidgetService();
+                    MyReceiver recvier =testappserver.new MyReceiver();
                     //Toast.makeText(context, next_text, Toast.LENGTH_SHORT).show();
-                    Log.d("TAG","拿到回复 内容是  "+ next_text);
+//                    getResp();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                response = example.run("http://192.168.43.91/yiju/index.php");
+                                System.out.println("thread_run: " + response);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                    while (true) {
+                        if (response != null) {
+                            break;
+                        }
+                    }
+                    Log.d("TAG","拿到回复 内容是  "+ response);
 
-                    //Toast.makeText(context, "小北你好!", Toast.LENGTH_SHORT).show();
-                    views.setTextViewText(R.id.appwidget_text, next_text);
+                    views.setTextViewText(R.id.appwidget_text, response);
                     // 发送一个系统广播
                     manager.updateAppWidget(provider, views);
                 }catch (Exception e)
             {
+                e.printStackTrace();
+                Log.d("TAG","崩了");
                 views.setTextViewText(R.id.appwidget_text, "服务器未连接");
                 // 发送一个系统广播
                 manager.updateAppWidget(provider, views);

@@ -54,15 +54,15 @@ if ($result->num_rows > 0) {
 		}
 		else
 			{
-				echo "<!DOCTYPE html>
-					<html>
-					<head>
-					<title>一句诗词</title>
-					</head>
-					<body>";
+				#echo "<!DOCTYPE html>
+				#	<html>
+				#	<head>
+				#	<title>一句诗词</title>
+				#	</head>
+				#	<body>";
 				echo $row["connet"];
-				echo "</body>
-					</html>";
+				#echo "</body>
+				#	</html>";
 					#echo "</br></br>";
 					#echo "</br></br>";
 					#<!-- <a href="index.php">提交页面</a> -->
