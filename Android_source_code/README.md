@@ -2,9 +2,9 @@
 
 关键词
 
-![AppWidgetProvider](https://img.shields.io/badge/-AppWidgetProvider-green.svg)![Widget](https://img.shields.io/badge/-Widget-green.svg)![RemoteViews](https://img.shields.io/badge/-RemoteViews-green.svg)
+![AppWidgetProvider](https://img.shields.io/badge/-AppWidgetProvider-green.svg)    ![Widget](https://img.shields.io/badge/-Widget-green.svg)      ![RemoteViews](https://img.shields.io/badge/-RemoteViews-green.svg)
 
-![示例图](https://github.com/muzhiyun/PHP_MySQL/tree/master/Android_source_code/demo.png)
+![示例图](https://github.com/muzhiyun/PHP_MySQL/blob/master/Android_source_code/demo.jpg)
 
 ##### 环境 
 
