@@ -23,7 +23,7 @@
 * 确保正确安装PHP+MySQL及HTTP服务器软件 PHP>5
 * 上传connet.php和index.php到网页服务器目录下，请修改connet.php中数据库账号密码等连接参数
 * 使用sql文件将数据导入或手动增加数据
-* 访问http://yourdomain/yiju/index.php测试
+* 访问````http://yourdomain/yiju/index.php````测试
 
 
 
