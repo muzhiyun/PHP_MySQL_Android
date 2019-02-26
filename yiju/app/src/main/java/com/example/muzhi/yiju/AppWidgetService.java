@@ -97,6 +97,7 @@ public class AppWidgetService extends Service{
                 //设置要显示的TextView，及显示的内容
                 try {
                     Log.d("TAG","进来了");
+                    String old = response;
                     AppWidgetService testappserver =new AppWidgetService();
                     MyReceiver recvier =testappserver.new MyReceiver();
                     //Toast.makeText(context, next_text, Toast.LENGTH_SHORT).show();
@@ -105,19 +106,28 @@ public class AppWidgetService extends Service{
                         @Override
                         public void run() {
                             try {
-                                response = example.run("http://192.168.43.91/yiju/index.php");
+
+                                response = example.run("http://192.168.1.155/yiju/index.php");
                                 System.out.println("thread_run: " + response);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         }
                     }).start();
-                    while (true) {
-                        if (response != null) {
-                            break;
-                        }
+//                    while (true) {
+//                        if (response != null) {
+//                            break;
+//                        }
+//                    }
+                    try {
+                        Thread.sleep(800);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                     Log.d("TAG","拿到回复 内容是  "+ response);
+                    if (response==old) {
+                        response="服务器未连接";
+                    }
 
                     views.setTextViewText(R.id.appwidget_text, response);
                     // 发送一个系统广播
@@ -125,8 +135,7 @@ public class AppWidgetService extends Service{
                 }catch (Exception e)
             {
                 e.printStackTrace();
-                Log.d("TAG","崩了");
-                views.setTextViewText(R.id.appwidget_text, "服务器未连接");
+                views.setTextViewText(R.id.appwidget_text, "软件异常");
                 // 发送一个系统广播
                 manager.updateAppWidget(provider, views);
             }

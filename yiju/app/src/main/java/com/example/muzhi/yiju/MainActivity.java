@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
               //加载网页需要连接互联网的权限，需要在AndroidManifest中进行声明
                 //这样的好处：可以让用户很清楚的看到app所需要的权限
                //用户并不清楚和重视权限问题，造成了病毒问题的泛滥。其实是可以避免的！
-              webView.loadUrl("http://192.168.43.91");
+              webView.loadUrl("http://192.168.1.155");
          }
 /*
     @Override
