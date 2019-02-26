@@ -1,8 +1,11 @@
 #### 类似一言/一句的诗词推送安卓端源码
 
-关键词
+##### 关键词
 
 ![AppWidgetProvider](https://img.shields.io/badge/-AppWidgetProvider-green.svg)    ![Widget](https://img.shields.io/badge/-Widget-green.svg)      ![RemoteViews](https://img.shields.io/badge/-RemoteViews-green.svg)
+
+##### 示例图
+
 ![示例图](https://github.com/muzhiyun/PHP_MySQL/blob/master/Android_source_code/demo.gif)
 
 ##### 环境 
